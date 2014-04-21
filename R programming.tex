@@ -1,0 +1,121 @@
+\documentclass[a4paper,oneside, 12pt]{report}
+\usepackage[latin1]{inputenc}
+\usepackage{multicol}
+\usepackage{graphicx} 
+\usepackage{float}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{array}
+\fancyhf{}
+\lhead[\thepage]{\rightmark}
+\pagestyle{headings}
+\usepackage[top=3cm, bottom=3cm, left=2.5cm, right=2.5cm]{geometry}
+\renewcommand{\thesection}{\arabic{section}}
+\usepackage{enumerate}
+\usepackage{mathtools}
+\usepackage{fixltx2e}
+\usepackage{hyperref}
+
+\usepackage{booktabs} % nicer tables, use \toprule \midrule \bottomrule instead of \hline
+\usepackage{topcapt} % same, use \topcaption{} as caption above table inseat of \caption{}
+\usepackage{multirow}
+\usepackage{tikz} % for latex-made figures
+\usepackage{pgfplots}
+\usetikzlibrary{shapes,arrows}
+\usepackage{subfigure}
+\usepackage{url}
+
+
+\begin{document}
+
+\begin{titlepage}
+\vspace{10cm}
+\begin{center}
+\large
+R programming\\
+Notes
+\end{center}
+
+\vspace*{3cm}
+
+
+\end{titlepage}
+
+%-------------------------------------------------------------------------------------
+\setcounter{tocdepth}{3}
+\tableofcontents
+\setcounter{page}{2}
+\pagebreak
+
+\newpage
+\section{Lecture 1}
+\subsection{Reading and writing data}
+Function name: read.table() \\
+Input arguments: file name, header = logical index if the file has a header line, sep = a string indicating how the columns are separated. \\
+\\
+Function read.csv() is identical to read.table except that the default separator is comma while for read.table the separator is space.\\
+\\
+Function name: readLines(); it is used to read text lines \\
+\\
+When the dataset is loaded in the R, it is stored in RAM so it is important to have rough estimate of the data size. Another important argument as colClasses can be used to specify of different data class and R does not have to deal with it automatically that makes the program slow when dealing with large datasets. \\
+{\bf Textual formatting:} Dumping and Dputing provides the editable textual formats. dput constructs the R code that can be used to get the R object. Similarly multiple objects can be departed using the dump function and read back in using source. \\
+{\bf Interfaces:} Data are read in using connection interfaces. Connection can made to files or to other sources like webpages. for example file is used to open connections to a file, url to open a connection to we page.\\
+\\
+Function name: file()
+Input arguments: ``r'' - read only, ``w'' - write only etc.
+\section{Lecture 2}
+\subsection{Control structure}
+{\bf IF loop:}\\
+General loop structure:- \\
+if(condition)\{\\
+\indent expression\\
+\}\\
+else if(condition)\{\\
+\indent expression\\
+\}\\
+else \{\\
+\}\\
+\\
+{\bf FOR loop:} For loop can be nested, so a loop can be inside another loop.\\
+General loop structure:- \\
+for(i in 1:10)\{\\
+\indent expressions\\
+\}\\
+\\
+{\bf While loop:} It begins by testing a condition. If it is true, the code is executed. While loops can potentially result in infinite loop so one need to be careful when executing while loop.\\
+General loop structure:- \\
+while(condition)\{\\
+\indent Expressions\\
+\indent condition control structure\\
+\}\\
+\\
+{\bf Repeat loop:} Repeat initiates an infinite loop. The only way to exit a repeat loop is to call break. It is better to use for loop than using the repeat loop.\\
+General loop structure:- \\
+repeat \{\\
+\indent Expression\\
+\indent condition of convergence and break \\
+\}\\
+\\
+{\bf Next:} It is used to skip an iteration of a loop.\\
+General loop structure:- \\
+for (i in 1:100)\{\\
+\indent if(i <= 20)\{\\
+\indent \indent next\\
+\indent \}\\
+\indent Expression\\
+\}\\
+\subsection{Functions}
+Function are first class object which means that they can passed as arguments to other functions or it can be nested.\\
+General loop structure:- \\
+f <- function(arguments)\{\\
+expressions\\
+\}\\
+Function arguments can have the default arguments. If the arguments are named, the order of the arguments can be reversed however having one named argument and another unnamed argument can lead to confusion.
+To see the arguments of a function type-->\\
+args(function name)\\
+\\
+... represents a variable number of arguments that are usually passed on to other functions. \\
+args(paste) -- Paste function allows you to paste different variables. It starts with ... as different arguments can be included in the paste function. However after ... you can use partial matching of the variables. By default sep paste space between the arguments.\\
+
+
+\end{document}
