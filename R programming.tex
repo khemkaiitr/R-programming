@@ -117,5 +117,66 @@ args(function name)\\
 ... represents a variable number of arguments that are usually passed on to other functions. \\
 args(paste) -- Paste function allows you to paste different variables. It starts with ... as different arguments can be included in the paste function. However after ... you can use partial matching of the variables. By default sep paste space between the arguments.\\
 
+\section{Lecture 3}
+{\bf Loop functions:} Loop functions have apply as the keyword in them. These looping functions make the implementation of loops easier. \\
+\\
+{\bf lapply:} It loops over a list and evaluate a function on each element. lapply always returns a list, regardless of the class of the input.\\
+Function name: lapply\\
+Arguments: (1) a list x (2) a function FUN and (3) other arguments via its ... arguments.\\
+Example code: \\
+x $<-$ 1:4 \\
+lapply(x, runic, min= 0, max = 10)\\
+lapply and friends make heavy use of anonymous functions. Anonymous functions are those which do not have a name. For example a function for extracting the first column of each matrix.\\
+\indent \indent lapply(x, function(elt) elt[,1])
+\\
+\\
+{\bf sapply:} A variant of lapply that simplifies the results of the lapply. If the result of lapply is a list where every element is length 1, then a vector is returned for spply. If the result is a list where every element is a vector of the same length, a matrix is returned. \\
+Example: sapply(x, mean)
+\\
+\\
+{\bf Apply:} Apply function is applied on array, to apply the function across the entire array.\\
+Example: apply(x, 2, mean) where 2 is used to get the column wise mean.\\
+\indent apply(x,1, quantile, probs = c(0.25, 0.75))\\
 
+To calculate row mean or row sums we have functions like, rowSums, rowMeans, colSums etc. They are faster than using apply function. 
+\\
+\\
+{\bf tappply} It is used to apply a function over subsets of a vector. \\
+Function name: str(tapply) \\
+usage: function(X, INDEX, fun = NULL, ... , simplify = TURE)\\
+Example: x $<-$ c(rnorm(10), runif(10), rnorm(10,1))\\
+\indent f$<-$ gl(3,10)\\
+\indent tapply(x, f, mean)\\ Provides the mean for x depending on the levels. If the simplify is not applied we get a list as a solution.
+\\
+\\
+{\bf split:} It takes a vector or other objects and splits it into groups determined by a factor or list of factors. \\
+Function name: function(x, f, drop = FALSE, ...)\\
+Usage: split(x,f) in above example will give a list, but this does not apply the summary statistics. It splits the x in different levels indicated by levels in f. Once split, tapply and other functions can be used onto it. e.g.\\
+\indent lapply(split(x,f), mean) : here tapply will do the same thing. \\
+\indent Usage: s $<-$ split(airquality, airquality\$Month)\\
+\indent \indent lapply(s, function(x) colMeans(x[,c("Ozone", "Solar.R", "wind")])\\
+However it will give a list. Here we use lapply over split along with an anonymous function. \\ 
+\\
+{\bf mapply}: A multivariate apply function that applies a function in parallel over a set of arguments. It allow one to apply the same functions over different list without using for loop.\\
+Function usage: function(FUN, ... , Moreargs = NULL, simplify = TRUE)\\
+Example: list ( rep(1,4), rep(2,3). rep(3,2), rep(4,1)) instead we can also do\\
+\indent mapply(rep, 1:4, 4:1)\\
+Here mapply is used to apply same function over different arguments\\
+
+\subsection{Debugging}
+How to get information about errors:
+\begin{itemize}
+	\item Message: Normal message, diagnostic message
+	\item warning: something is wrong but not necessarily fatal, execution of the function continues
+	\item error: tatar problem has occurred and the execution of the function stops.
+	\item condition: Something unexpected has occur
+\end{itemize}
+Functions to debug the program:
+\begin{itemize}
+	\item trackback: prints out the function call stack after an error occurs; does nothing if no error.
+	\item debug: flags a function for "debug" mode which allows you to step through execution of a function one line at a time.
+	\item browser: suspends the execution of a function whenever it is called and puts the function in debug mode. Can be started anywhere in the function.
+	\item trace: allows you to insert debugging code into a function a specific places.
+	\item recover: allows you to modify the error behaviour so that you can browse the function call stack.
+\end{itemize}
 \end{document}
